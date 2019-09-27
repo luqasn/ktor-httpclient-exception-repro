@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+sourceSets {
+    main.kotlin.srcDirs = [ 'src' ]
+}
+
+repositories {
+    jcenter()
+    maven { url "https://dl.bintray.com/kotlin/ktor" }
+}
+
+task testCIO(type: JavaExec) {
+    group = "Execution"
+    classpath = sourceSets.main.runtimeClasspath
+    main = "CIOKt"
+}
+
+task testApache(type: JavaExec) {
+    group = "Execution"
+    classpath = sourceSets.main.runtimeClasspath
+    main = "ApacheKt"
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.50"
+    compile "io.ktor:ktor-server-netty:1.3.0-beta-1"
+    compile "io.ktor:ktor-client-apache:1.3.0-beta-1"
+    compile "io.ktor:ktor-client-cio:1.3.0-beta-1"
+    compile "io.ktor:ktor-html-builder:1.3.0-beta-1"
+    compile "ch.qos.logback:logback-classic:1.2.3"
+}
+
